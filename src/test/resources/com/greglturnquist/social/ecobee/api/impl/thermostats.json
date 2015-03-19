@@ -1,0 +1,30 @@
+{
+  "page": {
+    "page": 1,
+    "totalPages": 1,
+    "pageSize": 1,
+    "total": 1
+  },
+  "thermostatList": [
+    {
+      "identifier": "161775386723",
+      "name": "My Test Thermostat",
+      "thermostatRev": "110128234025",
+      "isRegistered": true,
+      "modelNumber": "Smart",
+      "serialNumber": "1",
+      "productCode": "1",
+      "lastModified": "2011-01-28 23:40:25",
+      "alerts": [],
+      "settings": {
+        "hvacMode": "heat",
+        "lastServiceDate": "2011-01-28",
+        "serviceRemindMe": false
+      }
+    }
+  ],
+  "status": {
+    "code": 0,
+    "message": ""
+  }
+}

@@ -1,4 +1,4 @@
-package com.greglturnquist.springecobee;
+package com.greglturnquist.social.ecobee;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

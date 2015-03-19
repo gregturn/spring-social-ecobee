@@ -1,4 +1,4 @@
-package com.greglturnquist.springecobee;
+package com.greglturnquist.social.ecobee;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,9 +21,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
-public class Ecobee implements CommandLineRunner {
+public class EcobeeCommandLine implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(Ecobee.class);
+	private static final Logger log = LoggerFactory.getLogger(EcobeeCommandLine.class);
 
 	private RestTemplate restTemplate = new RestTemplate();
 
