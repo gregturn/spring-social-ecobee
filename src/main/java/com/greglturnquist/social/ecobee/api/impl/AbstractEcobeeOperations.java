@@ -14,4 +14,5 @@ class AbstractEcobeeOperations {
 	protected String buildUri(String path) {
 		return API_URL_BASE + path;
 	}
+
 }

@@ -7,6 +7,7 @@ import com.greglturnquist.social.ecobee.api.UserOperations;
 import com.greglturnquist.social.ecobee.api.impl.json.EcobeeModule;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
+import org.springframework.social.oauth2.OAuth2Version;
 
 public class EcobeeTemplate extends AbstractOAuth2ApiBinding implements Ecobee {
 
@@ -21,6 +22,11 @@ public class EcobeeTemplate extends AbstractOAuth2ApiBinding implements Ecobee {
 	public EcobeeTemplate(String accessToken) {
 		super(accessToken);
 		initSubApis();
+	}
+
+	@Override
+	protected OAuth2Version getOAuth2Version() {
+		return OAuth2Version.BEARER;
 	}
 
 	@Override
@@ -45,7 +51,8 @@ public class EcobeeTemplate extends AbstractOAuth2ApiBinding implements Ecobee {
 
 	private void initSubApis() {
 		this.userOperations = new UserTemplate(getRestTemplate(), this.isAuthorized());
-		this.thermostatOperations = new ThermostatTemplate(getRestTemplate(), this.isAuthorized());
+		this.thermostatOperations = new ThermostatTemplate(getRestTemplate(), this.isAuthorized(),
+				this.getJsonMessageConverter());
 	}
 
 }

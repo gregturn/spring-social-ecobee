@@ -4,6 +4,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.greglturnquist.social.ecobee.api.Thermostat;
+import com.greglturnquist.social.ecobee.api.ThermostatDetails;
+import com.greglturnquist.social.ecobee.api.ThermostatSummary;
+import com.greglturnquist.social.ecobee.api.impl.EcobeeTemplate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,16 +32,19 @@ public class EcobeeCommandLine implements CommandLineRunner {
 
 	private RestTemplate restTemplate = new RestTemplate();
 
-	@Value("${spring.ecobee.pin.apiKey}")
+	@Value("${spring.ecobee.pin.apiKey:foo}")
 	private String pinApiKey;
 
-	@Value("${spring.ecobee.authorizationCode.apiKey}")
+	@Value("${spring.ecobee.authorizationCode.apiKey:foo}")
 	private String authorizationCodeApiKey;
 
-	@Value("${spring.ecobee.username}")
+	@Value("${ecobee.token}")
+	private String ecobeeToken;
+
+	@Value("${spring.ecobee.username:foo}")
 	private String username;
 
-	@Value("${spring.ecobee.password}")
+	@Value("${spring.ecobee.password:foo}")
 	private String password;
 
 	String apiUrl = "https://api.ecobee.com";
@@ -46,7 +54,8 @@ public class EcobeeCommandLine implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 
 		//requestPinCode();
-		requestAuthorizationCode();
+		//requestAuthorizationCode();
+		foo();
 	}
 
 	private void requestPinCode() {
@@ -142,6 +151,23 @@ public class EcobeeCommandLine implements CommandLineRunner {
 			log.info(loginResponse.getStatusCode().toString());
 			loginResponse.getHeaders().entrySet().stream().forEach(h -> log.info(h.getKey() + " -> " + h.getValue()));
 			log.info(loginResponse.getBody());
+		}
+	}
+
+	private void foo() throws Exception {
+
+		try {
+			EcobeeTemplate ecobeeTemplate = new EcobeeTemplate(this.ecobeeToken);
+			ThermostatSummary thermostatSummary = ecobeeTemplate.thermostatOperations().getThermostatSummary();
+			log.info("You have " + thermostatSummary.getThermostatCount() + " thermostat(s)");
+			for (ThermostatDetails thermostatDetails : thermostatSummary.getParsedRevisionList()) {
+				log.info(thermostatDetails.toString());
+			}
+			for (Thermostat thermostat : ecobeeTemplate.thermostatOperations().getThermostats()) {
+				log.info(thermostat.toString());
+			}
+		} catch (HttpServerErrorException e) {
+			System.out.println(e.getResponseBodyAsString());
 		}
 	}
 }

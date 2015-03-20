@@ -19,7 +19,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testGetThermostats() throws Exception {
 
-		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat"))
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=%7B%22selection%22:%7B%22selectionType%22:%22registered%22%7D%7D"))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(jsonResource("thermostats"), MediaType.APPLICATION_JSON));
 
@@ -37,7 +37,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testThermostatSummary() throws Exception {
 
-		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostatSummary"))
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostatSummary?json=%7B%22selection%22:%7B%22selectionType%22:%22registered%22%7D%7D"))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(jsonResource("thermostatSummary"), MediaType.APPLICATION_JSON));
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ThermostatOperations {
 
-	List<Thermostat> getThermostats();
+	List<Thermostat> getThermostats() throws Exception;
 
-	ThermostatSummary getThermostatSummary();
+	ThermostatSummary getThermostatSummary() throws Exception;
 }
