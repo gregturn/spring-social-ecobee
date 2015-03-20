@@ -3,7 +3,9 @@ package com.greglturnquist.social.ecobee.api.impl.json;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.greglturnquist.social.ecobee.api.EcobeeUserProfile;
 import com.greglturnquist.social.ecobee.api.Settings;
+import com.greglturnquist.social.ecobee.api.Status;
 import com.greglturnquist.social.ecobee.api.Thermostat;
+import com.greglturnquist.social.ecobee.api.ThermostatSummary;
 import com.greglturnquist.social.ecobee.api.Thermostats;
 
 public class EcobeeModule extends SimpleModule {
@@ -18,5 +20,7 @@ public class EcobeeModule extends SimpleModule {
 		context.setMixInAnnotations(Thermostats.class, ThermostatsMixin.class);
 		context.setMixInAnnotations(Thermostat.class, ThermostatMixin.class);
 		context.setMixInAnnotations(Settings.class, SettingsMixin.class);
+		context.setMixInAnnotations(Status.class, StatusMixin.class);
+		context.setMixInAnnotations(ThermostatSummary.class, ThermostatSummaryMixin.class);
 	}
 }
