@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -55,7 +54,7 @@ public class EcobeeCommandLine implements CommandLineRunner {
 
 		//requestPinCode();
 		//requestAuthorizationCode();
-		foo();
+		lookupThermstatsUsingAccessToken();
 	}
 
 	private void requestPinCode() {
@@ -154,20 +153,20 @@ public class EcobeeCommandLine implements CommandLineRunner {
 		}
 	}
 
-	private void foo() throws Exception {
+	private void lookupThermstatsUsingAccessToken() throws Exception {
 
-		try {
-			EcobeeTemplate ecobeeTemplate = new EcobeeTemplate(this.ecobeeToken);
-			ThermostatSummary thermostatSummary = ecobeeTemplate.thermostatOperations().getThermostatSummary();
-			log.info("You have " + thermostatSummary.getThermostatCount() + " thermostat(s)");
-			for (ThermostatDetails thermostatDetails : thermostatSummary.getParsedRevisionList()) {
-				log.info(thermostatDetails.toString());
-			}
-			for (Thermostat thermostat : ecobeeTemplate.thermostatOperations().getThermostats()) {
-				log.info(thermostat.toString());
-			}
-		} catch (HttpServerErrorException e) {
-			System.out.println(e.getResponseBodyAsString());
+		EcobeeTemplate ecobeeTemplate = new EcobeeTemplate(this.ecobeeToken);
+
+		ThermostatSummary thermostatSummary = ecobeeTemplate.thermostatOperations().getThermostatSummary();
+
+		log.info("You have " + thermostatSummary.getThermostatCount() + " thermostat(s)");
+
+		for (ThermostatDetails thermostatDetails : thermostatSummary.getParsedRevisionList()) {
+			log.info(thermostatDetails.toString());
+		}
+
+		for (Thermostat thermostat : ecobeeTemplate.thermostatOperations().getThermostats()) {
+			log.info(thermostat.toString());
 		}
 	}
 }
