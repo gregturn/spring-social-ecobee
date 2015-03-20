@@ -7,19 +7,42 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 import java.util.List;
 
+import com.greglturnquist.social.ecobee.api.Selection;
+import com.greglturnquist.social.ecobee.api.SelectionType;
 import com.greglturnquist.social.ecobee.api.Thermostat;
 import com.greglturnquist.social.ecobee.api.ThermostatDetails;
 import com.greglturnquist.social.ecobee.api.ThermostatSummary;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.util.UriUtils;
 
 public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 
 	@Test
+	public void testGetThermostat() throws Exception {
+
+		final Selection selection = new Selection(new SelectionType("thermostats", "161775386723"));
+		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(jsonResource("thermostats"), MediaType.APPLICATION_JSON));
+
+		final Thermostat thermostat = ecobee.thermostatOperations().getThermostat("161775386723");
+		assertThat(thermostat, notNullValue());
+		assertThat(thermostat.getIdentifier(), equalTo("161775386723"));
+		assertThat(thermostat.getName(), equalTo("My Test Thermostat"));
+		assertThat(thermostat.getLastModified(), equalTo("2011-01-28 23:40:25"));
+		assertThat(thermostat.getSettings().getHvacMode(), equalTo("heat"));
+		assertThat(thermostat.getSettings().getVent(), is(nullValue()));
+	}
+
+	@Test
 	public void testGetThermostats() throws Exception {
 
-		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=%7B%22selection%22:%7B%22selectionType%22:%22registered%22%7D%7D"))
+		final Selection selection = new Selection(new SelectionType("registered", ""));
+		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(jsonResource("thermostats"), MediaType.APPLICATION_JSON));
 
@@ -35,9 +58,11 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	}
 
 	@Test
-	public void testThermostatSummary() throws Exception {
+	public void testGetThermostatSummary() throws Exception {
 
-		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostatSummary?json=%7B%22selection%22:%7B%22selectionType%22:%22registered%22%7D%7D"))
+		final Selection selection = new Selection(new SelectionType("registered", ""));
+		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostatSummary?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(jsonResource("thermostatSummary"), MediaType.APPLICATION_JSON));
 

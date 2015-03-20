@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 public class SelectionType {
 
 	private final String selectionType;
+	private final String selectionMatch;
 
 }

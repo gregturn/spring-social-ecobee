@@ -1,5 +1,6 @@
 package com.greglturnquist.social.ecobee.api.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -31,6 +32,10 @@ public abstract class AbstractEcobeeApiTest {
 
 	protected Resource jsonResource(String filename) {
 		return new ClassPathResource(filename + ".json", getClass());
+	}
+
+	protected ObjectMapper getObjectMapper() {
+		return this.ecobee.getJsonMessageConverter().getObjectMapper();
 	}
 
 }

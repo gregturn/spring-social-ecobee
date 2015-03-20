@@ -26,8 +26,17 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 	}
 
 	@Override
+	public Thermostat getThermostat(String identifier) throws Exception {
+		final Selection selection = new Selection(new SelectionType("thermostats", identifier));
+		final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
+		URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostat"))
+				.queryParam("json", selectionStr).build().toUri();
+		return this.restTemplate.getForObject(uri, Thermostats.class).getThermostats().get(0);
+	}
+
+	@Override
 	public List<Thermostat> getThermostats() throws Exception {
-		final Selection selection = new Selection(new SelectionType("registered"));
+		final Selection selection = new Selection(new SelectionType("registered", ""));
 		final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
 		URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostat"))
 				.queryParam("json", selectionStr).build().toUri();
@@ -36,7 +45,7 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 
 	@Override
 	public ThermostatSummary getThermostatSummary() throws Exception {
-		final Selection selection = new Selection(new SelectionType("registered"));
+		final Selection selection = new Selection(new SelectionType("registered", ""));
 		final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
 		URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostatSummary"))
 				.queryParam("json", selectionStr).build().toUri();

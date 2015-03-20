@@ -2,6 +2,7 @@ package com.greglturnquist.social.ecobee;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.greglturnquist.social.ecobee.api.Thermostat;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -155,18 +157,29 @@ public class EcobeeCommandLine implements CommandLineRunner {
 
 	private void lookupThermstatsUsingAccessToken() throws Exception {
 
-		EcobeeTemplate ecobeeTemplate = new EcobeeTemplate(this.ecobeeToken);
+		try {
+			EcobeeTemplate ecobeeTemplate = new EcobeeTemplate(this.ecobeeToken);
 
-		ThermostatSummary thermostatSummary = ecobeeTemplate.thermostatOperations().getThermostatSummary();
+			ThermostatSummary thermostatSummary = ecobeeTemplate.thermostatOperations().getThermostatSummary();
 
-		log.info("You have " + thermostatSummary.getThermostatCount() + " thermostat(s)");
+			log.info("You have " + thermostatSummary.getThermostatCount() + " thermostat(s)");
 
-		for (ThermostatDetails thermostatDetails : thermostatSummary.getParsedRevisionList()) {
-			log.info(thermostatDetails.toString());
-		}
+			final List<ThermostatDetails> parsedRevisionList = thermostatSummary.getParsedRevisionList();
+			for (ThermostatDetails thermostatDetails : parsedRevisionList) {
+				log.info(thermostatDetails.toString());
+			}
 
-		for (Thermostat thermostat : ecobeeTemplate.thermostatOperations().getThermostats()) {
-			log.info(thermostat.toString());
+			final List<Thermostat> thermostats = ecobeeTemplate.thermostatOperations().getThermostats();
+			for (Thermostat thermostat : thermostats) {
+				log.info(thermostat.toString());
+			}
+
+			log.info("Now looking up each thermostat...");
+			for (ThermostatDetails thermostatDetails : parsedRevisionList) {
+				log.info("Found " + ecobeeTemplate.thermostatOperations().getThermostat(thermostatDetails.getIdentifier()));
+			}
+		} catch (HttpServerErrorException e) {
+			log.error(e.getResponseBodyAsString());
 		}
 	}
 }
