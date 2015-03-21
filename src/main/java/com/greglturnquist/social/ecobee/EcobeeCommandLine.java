@@ -5,10 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.social.ecobee.api.Thermostat;
-import org.springframework.social.ecobee.api.ThermostatDetails;
-import org.springframework.social.ecobee.api.ThermostatSummary;
-import org.springframework.social.ecobee.api.impl.EcobeeTemplate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.social.ecobee.api.Thermostat;
+import org.springframework.social.ecobee.api.ThermostatDetails;
+import org.springframework.social.ecobee.api.ThermostatSummary;
+import org.springframework.social.ecobee.api.impl.EcobeeTemplate;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
@@ -26,7 +25,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Component
+//@Component
 public class EcobeeCommandLine implements CommandLineRunner {
 
 	private static final Logger log = LoggerFactory.getLogger(EcobeeCommandLine.class);

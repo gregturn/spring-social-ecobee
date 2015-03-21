@@ -2,38 +2,36 @@ package com.greglturnquist.social.ecobee;
 
 import javax.sql.DataSource;
 
-import org.springframework.social.ecobee.connect.EcobeeConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
-import org.springframework.social.UserIdSource;
-import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
-import org.springframework.social.config.annotation.SocialConfigurer;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.security.AuthenticationNameUserIdSource;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.ecobee.connect.EcobeeConnectionFactory;
 
-//@Configuration
-//@EnableSocial
-public class SocialConfig implements SocialConfigurer {
+@Configuration
+public class SocialConfig {
 
-	@Autowired
-	DataSource dataSource;
+	@Bean
+	public ConnectionFactoryLocator connectionFactoryLocator(EcobeeConnectionFactory factory) {
 
-	@Override
-	public void addConnectionFactories(ConnectionFactoryConfigurer configurer, Environment env) {
-		configurer.addConnectionFactory(new EcobeeConnectionFactory(env.getProperty("ecobee.apiKey")));
+		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
+		registry.addConnectionFactory(factory);
+		return registry;
 	}
 
-	@Override
-	public UserIdSource getUserIdSource() {
-		return new AuthenticationNameUserIdSource();
+	@Bean
+	public EcobeeConnectionFactory ecobeeConnectionFactory(Environment env) {
+		return new EcobeeConnectionFactory(env.getProperty("ecobee.apiKey"));
 	}
 
-	@Override
-	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator locator) {
-		return new JdbcUsersConnectionRepository(dataSource, locator, Encryptors.noOpText());
+	@Bean
+	public UsersConnectionRepository usersConnectionRepository(DataSource dataSource,
+		ConnectionFactoryLocator connectionFactoryLocator) {
+		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 	}
 
 }
