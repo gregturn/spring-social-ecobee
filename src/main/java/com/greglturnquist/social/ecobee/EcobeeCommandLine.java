@@ -5,10 +5,10 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.greglturnquist.social.ecobee.api.Thermostat;
-import com.greglturnquist.social.ecobee.api.ThermostatDetails;
-import com.greglturnquist.social.ecobee.api.ThermostatSummary;
-import com.greglturnquist.social.ecobee.api.impl.EcobeeTemplate;
+import org.springframework.social.ecobee.api.Thermostat;
+import org.springframework.social.ecobee.api.ThermostatDetails;
+import org.springframework.social.ecobee.api.ThermostatSummary;
+import org.springframework.social.ecobee.api.impl.EcobeeTemplate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

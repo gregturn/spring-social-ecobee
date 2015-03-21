@@ -2,7 +2,7 @@ package com.greglturnquist.social.ecobee;
 
 import javax.sql.DataSource;
 
-import com.greglturnquist.social.ecobee.connect.EcobeeConnectionFactory;
+import org.springframework.social.ecobee.connect.EcobeeConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.encrypt.Encryptors;
