@@ -5,16 +5,18 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
+import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.social.ecobee.api.Selection;
-import org.springframework.social.ecobee.api.SelectionType;
-import org.springframework.social.ecobee.api.Thermostat;
-import org.springframework.social.ecobee.api.ThermostatDetails;
-import org.springframework.social.ecobee.api.ThermostatSummary;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.social.ecobee.api.Function;
+import org.springframework.social.ecobee.api.Selection;
+import org.springframework.social.ecobee.api.Thermostat;
+import org.springframework.social.ecobee.api.ThermostatDetails;
+import org.springframework.social.ecobee.api.ThermostatFunction;
+import org.springframework.social.ecobee.api.ThermostatSummary;
 import org.springframework.web.util.UriUtils;
 
 public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
@@ -22,7 +24,9 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testGetThermostat() throws Exception {
 
-		final Selection selection = new Selection(new SelectionType("thermostats", "161775386723"));
+		final Selection selection = Selection.thermostats("161775386723");
+		selection.getSelection().setIncludeSettings(true);
+		selection.getSelection().setIncludeRuntime(true);
 		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
 		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
@@ -40,13 +44,15 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testGetThermostats() throws Exception {
 
-		final Selection selection = new Selection(new SelectionType("registered", ""));
+		final Selection selection = Selection.allThermostats();
+		selection.getSelection().setIncludeSettings(true);
+		selection.getSelection().setIncludeRuntime(true);
 		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
 		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(jsonResource("thermostats"), MediaType.APPLICATION_JSON));
 
-		final List<Thermostat> thermostats = ecobee.thermostatOperations().getThermostats();
+		final List<Thermostat> thermostats = ecobee.thermostatOperations().getAllThermostats();
 		assertThat(thermostats.size(), equalTo(1));
 
 		final Thermostat thermostat = thermostats.get(0);
@@ -60,7 +66,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testGetThermostatSummary() throws Exception {
 
-		final Selection selection = new Selection(new SelectionType("registered", ""));
+		final Selection selection = Selection.allThermostats();
 		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
 		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostatSummary?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
@@ -97,6 +103,41 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 		assertThat(thermostatDetails3.getAlertsRevision(), equalTo("080102000000"));
 		assertThat(thermostatDetails3.getRuntimeRevision(), equalTo("080102000000"));
 		assertThat(thermostatDetails3.getIntervalRevision(), equalTo("080102000000"));
+	}
+
+	@Test
+	public void testResumeFunction() throws Exception {
+
+		ThermostatFunction function = new ThermostatFunction(
+				Selection.thermostats("161775386723"), new Function("resumeProgram", new HashMap<String,String>()));
+		final String functionStr = this.getObjectMapper().writeValueAsString(function);
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat"))
+				.andExpect(method(HttpMethod.POST))
+				.andExpect(content().string(functionStr))
+				.andRespond(withSuccess().body(new byte[0]));
+
+		ecobee.thermostatOperations().resume("161775386723");
+
+		mockServer.verify();
+	}
+
+	@Test
+	public void testSendMessageFunction() throws Exception {
+
+		final HashMap<String,String> params = new HashMap<>();
+		params.put("text", "Greetings mate!");
+
+		ThermostatFunction function = new ThermostatFunction(
+				Selection.thermostats("161775386723"), new Function("sendMessage", params));
+		final String functionStr = this.getObjectMapper().writeValueAsString(function);
+		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat"))
+				.andExpect(method(HttpMethod.POST))
+				.andExpect(content().string(functionStr))
+				.andRespond(withSuccess().body(new byte[0]));
+
+		ecobee.thermostatOperations().sendMessage("161775386723", "Greetings mate!");
+
+		mockServer.verify();
 	}
 
 }

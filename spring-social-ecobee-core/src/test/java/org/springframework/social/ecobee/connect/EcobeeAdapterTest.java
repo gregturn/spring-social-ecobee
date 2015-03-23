@@ -1,16 +1,12 @@
 package org.springframework.social.ecobee.connect;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
-import org.springframework.social.ecobee.api.EcobeeUserProfile;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import org.springframework.social.ecobee.api.Ecobee;
-import org.springframework.social.ecobee.api.UserOperations;
 import org.springframework.social.connect.UserProfile;
+import org.springframework.social.ecobee.api.Ecobee;
 
 public class EcobeeAdapterTest {
 
@@ -21,18 +17,12 @@ public class EcobeeAdapterTest {
 	@Test
 	public void fetchProfile() {
 
-		UserOperations userOperations = Mockito.mock(UserOperations.class);
-		when(ecobee.userOperations()).thenReturn(userOperations);
-		when(userOperations.getUserProfile()).thenReturn(createProfile("gregturn", "Greg", "Turnquist", "gturnquist@pivotal.io"));
 		UserProfile profile = apiAdapter.fetchUserProfile(ecobee);
-		assertThat(profile.getEmail(), equalTo("gturnquist@pivotal.io"));
-		assertThat(profile.getFirstName(), equalTo("Greg"));
-		assertThat(profile.getLastName(), equalTo("Turnquist"));
-		assertThat(profile.getUsername(), equalTo("gregturn"));
-		assertThat(profile.getName(), equalTo("Greg Turnquist"));
+		assertThat(profile.getEmail(), equalTo("**Protected from 3rd party access**"));
+		assertThat(profile.getFirstName(), equalTo("**Protected"));
+		assertThat(profile.getLastName(), equalTo("access**"));
+		assertThat(profile.getUsername(), equalTo("**Protected from 3rd party access**"));
+		assertThat(profile.getName(), equalTo("**Protected from 3rd party access**"));
 	}
 
-	private EcobeeUserProfile createProfile(String username, String firstName, String lastName, String email) {
-		return new EcobeeUserProfile(email, firstName, lastName, username);
-	}
 }

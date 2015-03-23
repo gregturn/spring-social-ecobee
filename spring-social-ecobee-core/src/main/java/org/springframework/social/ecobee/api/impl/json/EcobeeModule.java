@@ -1,10 +1,13 @@
 package org.springframework.social.ecobee.api.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.social.ecobee.api.EcobeeRuntime;
 import org.springframework.social.ecobee.api.EcobeeUserProfile;
+import org.springframework.social.ecobee.api.Function;
 import org.springframework.social.ecobee.api.Settings;
 import org.springframework.social.ecobee.api.Status;
 import org.springframework.social.ecobee.api.Thermostat;
+import org.springframework.social.ecobee.api.ThermostatFunction;
 import org.springframework.social.ecobee.api.ThermostatSummary;
 import org.springframework.social.ecobee.api.Thermostats;
 
@@ -22,5 +25,8 @@ public class EcobeeModule extends SimpleModule {
 		context.setMixInAnnotations(Settings.class, SettingsMixin.class);
 		context.setMixInAnnotations(Status.class, StatusMixin.class);
 		context.setMixInAnnotations(ThermostatSummary.class, ThermostatSummaryMixin.class);
+		context.setMixInAnnotations(EcobeeRuntime.class, RuntimeMixin.class);
+		context.setMixInAnnotations(ThermostatFunction.class, ThermostatFunctionMixin.class);
+		context.setMixInAnnotations(Function.class, FunctionMixin.class);
 	}
 }

@@ -1,11 +1,10 @@
 package org.springframework.social.ecobee.connect;
 
-import org.springframework.social.ecobee.api.Ecobee;
-import org.springframework.social.ecobee.api.EcobeeUserProfile;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
+import org.springframework.social.ecobee.api.Ecobee;
 import org.springframework.web.client.HttpClientErrorException;
 
 public class EcobeeAdapter implements ApiAdapter<Ecobee> {
@@ -14,7 +13,7 @@ public class EcobeeAdapter implements ApiAdapter<Ecobee> {
 	public boolean test(Ecobee ecobee) {
 
 		try {
-			ecobee.userOperations().getUserProfile();
+			ecobee.thermostatOperations().getThermostatSummary();
 			return true;
 		} catch (HttpClientErrorException e) {
 			return false;
@@ -23,21 +22,18 @@ public class EcobeeAdapter implements ApiAdapter<Ecobee> {
 
 	@Override
 	public void setConnectionValues(Ecobee ecobee, ConnectionValues values) {
-
-		EcobeeUserProfile profile = ecobee.userOperations().getUserProfile();
-		values.setDisplayName(profile.getDisplayName());
+		values.setDisplayName(ecobee.thermostatOperations().getAllThermostats().get(0).getName());
 	}
 
 	@Override
 	public UserProfile fetchUserProfile(Ecobee ecobee) {
 
-		EcobeeUserProfile profile = ecobee.userOperations().getUserProfile();
 		return new UserProfileBuilder()
-				.setUsername(profile.getDisplayName())
-				.setFirstName(profile.getFirstName())
-				.setLastName(profile.getLastName())
-				.setEmail(profile.getUserName())
-				.setName(profile.getFirstName() + " " + profile.getLastName())
+				.setUsername("**Protected from 3rd party access**")
+				.setFirstName("**Protected from 3rd party access**")
+				.setLastName("**Protected from 3rd party access**")
+				.setEmail("**Protected from 3rd party access**")
+				.setName("**Protected from 3rd party access**")
 				.build();
 	}
 

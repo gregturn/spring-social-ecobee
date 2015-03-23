@@ -4,9 +4,14 @@ import java.util.List;
 
 public interface ThermostatOperations {
 
-	Thermostat getThermostat(String identifier) throws Exception;
+	Thermostat getThermostat(String identifier);
 
-	List<Thermostat> getThermostats() throws Exception;
+	List<Thermostat> getAllThermostats();
 
-	ThermostatSummary getThermostatSummary() throws Exception;
+	ThermostatSummary getThermostatSummary();
+
+	void resume(String identifier);
+
+	void sendMessage(String identifier, String message);
+
 }

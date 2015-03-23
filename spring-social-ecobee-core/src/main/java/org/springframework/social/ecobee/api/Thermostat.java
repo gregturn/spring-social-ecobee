@@ -11,5 +11,5 @@ public class Thermostat {
 	private final String name;
 	private final String lastModified;
 	private final Settings settings;
-
+	private final EcobeeRuntime runtime;
 }
