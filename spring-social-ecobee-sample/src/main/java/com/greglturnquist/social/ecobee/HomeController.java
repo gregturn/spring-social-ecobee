@@ -3,6 +3,7 @@ package com.greglturnquist.social.ecobee;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class HomeController {
 	public String home(Principal currentUser, Model model) {
 
 		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
+		model.addAttribute("authentication", SecurityContextHolder.getContext().getAuthentication());
 		return "home";
 	}
 

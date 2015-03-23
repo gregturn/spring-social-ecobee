@@ -168,7 +168,7 @@ public class EcobeeCommandLine implements CommandLineRunner {
 				log.info(thermostatDetails.toString());
 			}
 
-			final List<Thermostat> thermostats = ecobeeTemplate.thermostatOperations().getThermostats();
+			final List<Thermostat> thermostats = ecobeeTemplate.thermostatOperations().getAllThermostats();
 			for (Thermostat thermostat : thermostats) {
 				log.info(thermostat.toString());
 			}

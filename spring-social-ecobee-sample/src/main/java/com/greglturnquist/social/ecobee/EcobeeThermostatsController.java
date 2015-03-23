@@ -2,7 +2,9 @@ package com.greglturnquist.social.ecobee;
 
 import java.security.Principal;
 
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.ecobee.api.Ecobee;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@Log
 public class EcobeeThermostatsController {
 
 	private final ConnectionRepository connectionRepository;
@@ -28,7 +31,8 @@ public class EcobeeThermostatsController {
 		if (connection == null) {
 			return "redirect:/connect/ecobee";
 		}
-		model.addAttribute("thermostats", connection.getApi().thermostatOperations().getThermostats());
+		model.addAttribute("authentication", SecurityContextHolder.getContext().getAuthentication());
+		model.addAttribute("thermostats", connection.getApi().thermostatOperations().getAllThermostats());
 		return "ecobee/thermostats";
 	}
 }
