@@ -1,0 +1,65 @@
+{
+  "startDate": "2010-01-01",
+  "startInterval": 0,
+  "endDate": "2010-01-02",
+  "endInterval": 287,
+  "columns": "zoneHVACmode,zoneCalendarEvent",
+  "reportList": [
+    {
+      "thermostatIdentifier": "123456789012",
+      "rowCount": 576,
+      "rowList": [
+        "2010-01-01,00:00:00,heatOff,",
+        "2010-01-01,00:05:00,heatOff,",
+        "2010-01-01,00:10:00,heatOff,",
+        "2010-01-01,00:15:00,heatOff,",
+        "2010-01-01,00:20:00,heatOff,",
+        "2010-01-01,00:25:00,heatOff,",
+        "2010-01-01,00:30:00,heatOff,",
+        "2010-01-01,00:35:00,heatOff,",
+        "2010-01-01,00:40:00,heatOff,",
+        "2010-01-01,00:45:00,heatOff,"]
+    }
+  ],
+  "sensorList": [
+    {
+      "thermostatIdentifier": "Test thermostat",
+      "sensors": [
+        {
+          "sensorId": 1,
+          "sensorName": "Temp sensor 1",
+          "sensorType": "temperature",
+          "sensorUsage": "indoor"
+        },
+        {
+          "sensorId": 2,
+          "sensorName": "Humidity sensor 1",
+          "sensorType": "humidity",
+          "sensorUsage": "indoor"
+        },
+        {
+          "sensorId": 3,
+          "sensorName": "Temp sensor 2",
+          "sensorType": "temperature",
+          "sensorUsage": "outdoor"
+        },
+        {
+          "sensorId": 4,
+          "sensorName": "Humidity sensor 2",
+          "sensorType": "humidity",
+          "sensorUsage": "outdoor"
+        }
+      ],
+      "columns": [
+        "1", "2", "3", "4"
+      ],
+      "data": [
+        "a", "b", "c", "d"
+      ]
+    }
+  ],
+  "status": {
+    "code": 0,
+    "message": ""
+  }
+}

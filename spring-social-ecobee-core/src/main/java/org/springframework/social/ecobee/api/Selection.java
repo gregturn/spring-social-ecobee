@@ -19,5 +19,4 @@ public class Selection {
 		return new Selection(new SelectionType("registered", ""));
 	}
 
-
 }

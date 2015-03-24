@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,9 @@ import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.social.ecobee.api.Function;
+import org.springframework.social.ecobee.api.ReportSelection;
+import org.springframework.social.ecobee.api.RuntimeSensorMetadata;
+import org.springframework.social.ecobee.api.RuntimeSensorReport;
 import org.springframework.social.ecobee.api.Selection;
 import org.springframework.social.ecobee.api.Thermostat;
 import org.springframework.social.ecobee.api.ThermostatDetails;
@@ -27,6 +31,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 		final Selection selection = Selection.thermostats("161775386723");
 		selection.getSelection().setIncludeSettings(true);
 		selection.getSelection().setIncludeRuntime(true);
+		selection.getSelection().setIncludeDevice(true);
 		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
 		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
@@ -42,11 +47,12 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	}
 
 	@Test
-	public void testGetThermostats() throws Exception {
+	public void testGetAllThermostats() throws Exception {
 
 		final Selection selection = Selection.allThermostats();
 		selection.getSelection().setIncludeSettings(true);
 		selection.getSelection().setIncludeRuntime(true);
+		selection.getSelection().setIncludeDevice(true);
 		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
 		mockServer.expect(requestTo("https://api.ecobee.com/1/thermostat?json=" + selectionStr))
 				.andExpect(method(HttpMethod.GET))
@@ -106,7 +112,36 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	}
 
 	@Test
-	public void testResumeFunction() throws Exception {
+	public void testGetSensorReport() throws Exception {
+
+		final Date startDate = new Date();
+		final Date endDate = startDate;
+		final String columns = "";
+
+		final ReportSelection selection = ReportSelection.thermostats(startDate, endDate, columns);
+		selection.getSelection().setIncludeDevice(true);
+		final String selectionStr = UriUtils.encodeQueryParam(this.getObjectMapper().writeValueAsString(selection), "UTF-8");
+
+		mockServer.expect(requestTo("https://api.ecobee.com/1/runtimeReport?json=" + selectionStr))
+				.andExpect(method(HttpMethod.GET))
+				.andRespond(withSuccess(jsonResource("sensorReport"), MediaType.APPLICATION_JSON));
+
+		RuntimeSensorReport report = ecobee.thermostatOperations().getAllSensorReports(startDate, endDate, columns).get(0);
+		assertThat(report.getThermostatIdentifier(), equalTo("Test thermostat"));
+
+		assertThat(report.getSensors().size(), equalTo(4));
+		assertThat(report.getSensors(), hasItems(
+				new RuntimeSensorMetadata("1", "Temp sensor 1", "temperature", "indoor"),
+				new RuntimeSensorMetadata("2", "Humidity sensor 1", "humidity", "indoor"),
+				new RuntimeSensorMetadata("3", "Temp sensor 2", "temperature", "outdoor"),
+				new RuntimeSensorMetadata("4", "Humidity sensor 2", "humidity", "outdoor")));
+
+		assertThat(report.getColumns(), hasItems("1", "2", "3", "4"));
+		assertThat(report.getData(), hasItems("a", "b", "c", "d"));
+	}
+
+	@Test
+	public void testResume() throws Exception {
 
 		ThermostatFunction function = new ThermostatFunction(
 				Selection.thermostats("161775386723"), new Function("resumeProgram", new HashMap<String,String>()));
@@ -122,7 +157,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	}
 
 	@Test
-	public void testSendMessageFunction() throws Exception {
+	public void testSendMessage() throws Exception {
 
 		final HashMap<String,String> params = new HashMap<>();
 		params.put("text", "Greetings mate!");

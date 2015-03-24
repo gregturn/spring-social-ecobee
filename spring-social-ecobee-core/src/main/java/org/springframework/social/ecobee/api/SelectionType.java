@@ -12,5 +12,6 @@ public class SelectionType {
 
 	private boolean includeSettings = false;
 	private boolean includeRuntime = false;
+	private boolean includeDevice = false;
 
 }

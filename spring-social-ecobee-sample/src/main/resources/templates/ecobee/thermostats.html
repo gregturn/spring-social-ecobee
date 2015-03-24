@@ -22,6 +22,20 @@
                 Target cold is <span th:text="${thermostat.runtime.desiredCool}" />.
                 Target heat is <span th:text="${thermostat.runtime.desiredHeat}" />.
             </div>
+            <div th:each="report : ${runtimeReports}">
+                <span th:each="${report.thermostatIdentifier}"/> has the following sensors:
+                <ul>
+                    <li th:each="sensor : ${report.sensors}"/>
+                </ul>
+                Columns:
+                <div th:each="column : ${report.columns}">
+                    <span th:text="${column}"/>
+                </div>
+                Data:
+                <div th:each="data : ${report.data}">
+                    <span th:text="${data}"/>
+                </div>
+            </div>
         </div>
 
     </div>

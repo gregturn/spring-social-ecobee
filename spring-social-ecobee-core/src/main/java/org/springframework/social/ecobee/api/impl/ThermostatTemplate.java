@@ -1,17 +1,22 @@
 package org.springframework.social.ecobee.api.impl;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.ecobee.api.Function;
+import org.springframework.social.ecobee.api.ReportSelection;
+import org.springframework.social.ecobee.api.RuntimeReport;
+import org.springframework.social.ecobee.api.RuntimeSensorReport;
 import org.springframework.social.ecobee.api.Selection;
 import org.springframework.social.ecobee.api.Thermostat;
 import org.springframework.social.ecobee.api.ThermostatFunction;
 import org.springframework.social.ecobee.api.ThermostatOperations;
 import org.springframework.social.ecobee.api.ThermostatSummary;
 import org.springframework.social.ecobee.api.Thermostats;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,6 +40,7 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 			final Selection selection = Selection.thermostats(identifier);
 			selection.getSelection().setIncludeSettings(true);
 			selection.getSelection().setIncludeRuntime(true);
+			selection.getSelection().setIncludeDevice(true);
 			final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
 			URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostat"))
 					.queryParam("json", selectionStr).build().toUri();
@@ -51,6 +57,7 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 			final Selection selection = Selection.allThermostats();
 			selection.getSelection().setIncludeSettings(true);
 			selection.getSelection().setIncludeRuntime(true);
+			selection.getSelection().setIncludeDevice(true);
 			final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
 			URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostat"))
 					.queryParam("json", selectionStr).build().toUri();
@@ -69,6 +76,25 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 			URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostatSummary"))
 					.queryParam("json", selectionStr).build().toUri();
 			return this.restTemplate.getForObject(uri, ThermostatSummary.class);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public List<RuntimeSensorReport> getAllSensorReports(Date startDate, Date endDate, String columns, String... identifiers) {
+
+		try {
+			final ReportSelection selection = ReportSelection.thermostats(startDate, endDate, columns, identifiers);
+			selection.getSelection().setIncludeDevice(true);
+			final String selectionStr = this.jsonMessageConverter.getObjectMapper().writeValueAsString(selection);
+			URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/runtimeReport"))
+					.queryParam("json", selectionStr).build().toUri();
+			System.out.println(uri.toString());
+			return this.restTemplate.getForObject(uri, RuntimeReport.class).getSensorList();
+		} catch (HttpServerErrorException e) {
+			System.out.println(e.getResponseBodyAsString());
+			throw new RuntimeException(e);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
