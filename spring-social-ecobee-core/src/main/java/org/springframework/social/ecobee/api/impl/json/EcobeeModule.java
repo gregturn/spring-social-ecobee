@@ -25,7 +25,7 @@ public class EcobeeModule extends SimpleModule {
 		context.setMixInAnnotations(Settings.class, SettingsMixin.class);
 		context.setMixInAnnotations(Status.class, StatusMixin.class);
 		context.setMixInAnnotations(ThermostatSummary.class, ThermostatSummaryMixin.class);
-		context.setMixInAnnotations(EcobeeRuntime.class, RuntimeMixin.class);
+		context.setMixInAnnotations(EcobeeRuntime.class, EcobeeRuntimeMixin.class);
 		context.setMixInAnnotations(ThermostatFunction.class, ThermostatFunctionMixin.class);
 		context.setMixInAnnotations(Function.class, FunctionMixin.class);
 	}

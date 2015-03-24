@@ -90,10 +90,8 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 		params.put("text", message);
 
 		final Function sendMessage = new Function("sendMessage", params);
+		final ThermostatFunction function = new ThermostatFunction(Selection.thermostats(identifier), sendMessage);
 
-		ThermostatFunction function = new ThermostatFunction(Selection.thermostats(identifier), sendMessage);
-
-		URI uri = UriComponentsBuilder.fromHttpUrl(buildUri("/thermostat")).build().toUri();
-		this.restTemplate.postForObject(uri, function, String.class);
+		this.restTemplate.postForObject(buildUri("/thermostat"), function, String.class);
 	}
 }

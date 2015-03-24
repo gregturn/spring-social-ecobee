@@ -18,9 +18,9 @@
             <div th:each="thermostat : ${thermostats}">
                 Thermostat <span th:text="${thermostat.identifier}"/> is known as <span th:text="${thermostat.name}"/>.
                 It is currently in <span th:text="${thermostat.settings.hvacMode}"/> mode.
-                Current temperature is <span th:text="${thermostat.runtime.actualTemperature}/10"/>.
-                Target cold is <span th:text="${thermostat.runtime.desiredCool}/10" />.
-                Target heat is <span th:text="${thermostat.runtime.desiredHeat}/10" />.
+                Current temperature is <span th:text="${thermostat.runtime.actualTemperature}"/>.
+                Target cold is <span th:text="${thermostat.runtime.desiredCool}" />.
+                Target heat is <span th:text="${thermostat.runtime.desiredHeat}" />.
             </div>
         </div>
 
