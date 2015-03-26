@@ -109,7 +109,7 @@ public class ThermostatTemplate extends AbstractEcobeeOperations implements Ther
 	@Override
 	public void sendMessage(String identifier, String message) {
 
-		final HashMap<String, String> params = new HashMap<>();
+		final HashMap<String, String> params = new HashMap<String, String>();
 		params.put("text", message);
 
 		final Function sendMessage = new Function("sendMessage", params);

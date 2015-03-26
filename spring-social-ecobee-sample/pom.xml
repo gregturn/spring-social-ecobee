@@ -53,13 +53,15 @@
 				<version>1.4</version>
 				<executions>
 					<execution>
-						<id>enforce-versions</id>
+						<id>enforce-java</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
 						<configuration>
 							<rules>
-								<requireJavaVersion>[1.8,1.9)</requireJavaVersion>
+								<requireJavaVersion>
+									<version>[1.8,1.9)</version>
+								</requireJavaVersion>
 							</rules>
 						</configuration>
 					</execution>

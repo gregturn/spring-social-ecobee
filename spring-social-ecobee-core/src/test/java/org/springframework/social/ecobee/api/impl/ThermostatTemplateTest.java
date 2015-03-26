@@ -144,7 +144,7 @@ public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 	@Test
 	public void testSendMessage() throws Exception {
 
-		final HashMap<String,String> params = new HashMap<>();
+		final HashMap<String,String> params = new HashMap<String, String>();
 		params.put("text", "Greetings mate!");
 
 		ThermostatFunction function = new ThermostatFunction(

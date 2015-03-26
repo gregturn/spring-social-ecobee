@@ -39,7 +39,7 @@ public class ThermostatSummary {
 	public List<ThermostatDetails> getParsedRevisionList() {
 
 		if (this.parsedRevisionList == null) {
-			this.parsedRevisionList = new ArrayList<>();
+			this.parsedRevisionList = new ArrayList<ThermostatDetails>();
 
 			for (String revision : revisionList) {
 				String[] parts = revision.split(":");
