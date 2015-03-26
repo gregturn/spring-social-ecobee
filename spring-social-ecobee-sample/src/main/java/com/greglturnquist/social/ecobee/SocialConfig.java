@@ -29,6 +29,9 @@ import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.ecobee.connect.EcobeeConnectionFactory;
 
+/**
+ * @author Greg Turnquist
+ */
 @Configuration
 public class SocialConfig {
 

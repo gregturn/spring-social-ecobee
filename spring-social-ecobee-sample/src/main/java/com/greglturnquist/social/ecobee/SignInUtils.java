@@ -18,6 +18,9 @@ package com.greglturnquist.social.ecobee;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+/**
+ * @author Greg Turnquist
+ */
 public class SignInUtils {
 
 	public static void signin(String userId) {

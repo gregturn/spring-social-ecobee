@@ -15,6 +15,9 @@
  */
 package org.springframework.social.ecobee.api.impl;
 
+/**
+ * @author Greg Turnquist
+ */
 class AbstractEcobeeOperations {
 
 	private final boolean isAuthorized;

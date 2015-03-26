@@ -19,6 +19,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @RequiredArgsConstructor
 public class Selection {

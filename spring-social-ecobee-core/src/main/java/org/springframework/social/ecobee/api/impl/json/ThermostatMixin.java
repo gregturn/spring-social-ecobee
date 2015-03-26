@@ -22,6 +22,9 @@ import org.springframework.social.ecobee.api.EcobeeRuntime;
 import org.springframework.social.ecobee.api.RemoteSensor;
 import org.springframework.social.ecobee.api.Settings;
 
+/**
+ * @author Greg Turnquist
+ */
 public class ThermostatMixin extends EcobeeObjectMixin {
 
 	public ThermostatMixin(@JsonProperty("identifier") String identifier,

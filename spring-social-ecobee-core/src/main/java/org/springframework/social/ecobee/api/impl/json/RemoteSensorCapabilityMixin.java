@@ -17,6 +17,9 @@ package org.springframework.social.ecobee.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author Greg Turnquist
+ */
 public class RemoteSensorCapabilityMixin extends EcobeeObjectMixin {
 
 	public RemoteSensorCapabilityMixin(@JsonProperty("id") String id,

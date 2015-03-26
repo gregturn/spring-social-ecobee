@@ -20,6 +20,9 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @AllArgsConstructor
 public class EcobeeUserProfile implements Serializable {

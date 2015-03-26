@@ -20,6 +20,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.ecobee.api.RuntimeSensorMetadata;
 
+/**
+ * @author Greg Turnquist
+ */
 public class RuntimeSensorReportMixin extends EcobeeObjectMixin {
 	
 	public RuntimeSensorReportMixin(@JsonProperty("thermostatIdentifer") String thermostatIdentifier,

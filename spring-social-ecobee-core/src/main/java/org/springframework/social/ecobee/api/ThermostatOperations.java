@@ -17,6 +17,9 @@ package org.springframework.social.ecobee.api;
 
 import java.util.List;
 
+/**
+ * @author Greg Turnquist
+ */
 public interface ThermostatOperations {
 
 	Thermostat getThermostat(String identifier);

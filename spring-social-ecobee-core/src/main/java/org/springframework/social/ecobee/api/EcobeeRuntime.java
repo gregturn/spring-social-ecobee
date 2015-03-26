@@ -18,6 +18,9 @@ package org.springframework.social.ecobee.api;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @RequiredArgsConstructor
 public class EcobeeRuntime {

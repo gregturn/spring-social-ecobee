@@ -18,6 +18,9 @@ package org.springframework.social.ecobee.api;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Greg Turnquist
+ */
 public final class EcobeeUtility {
 
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");

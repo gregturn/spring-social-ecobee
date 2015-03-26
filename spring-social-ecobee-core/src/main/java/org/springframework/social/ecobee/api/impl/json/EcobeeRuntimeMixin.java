@@ -17,6 +17,9 @@ package org.springframework.social.ecobee.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author Greg Turnquist
+ */
 public class EcobeeRuntimeMixin extends EcobeeObjectMixin {
 	
 	public EcobeeRuntimeMixin(@JsonProperty("connected") boolean connected,

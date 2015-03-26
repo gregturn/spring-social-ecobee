@@ -18,6 +18,9 @@ package org.springframework.social.ecobee.api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @AllArgsConstructor
 public class Settings {

@@ -22,6 +22,9 @@ import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.ecobee.api.Ecobee;
 import org.springframework.web.client.HttpClientErrorException;
 
+/**
+ * @author Greg Turnquist
+ */
 public class EcobeeAdapter implements ApiAdapter<Ecobee> {
 
 	@Override

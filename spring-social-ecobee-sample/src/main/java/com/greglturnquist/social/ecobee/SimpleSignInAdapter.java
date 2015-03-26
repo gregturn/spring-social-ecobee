@@ -26,6 +26,9 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
 
+/**
+ * @author Greg Turnquist
+ */
 public class SimpleSignInAdapter implements SignInAdapter {
 
 	private final RequestCache requestCache;

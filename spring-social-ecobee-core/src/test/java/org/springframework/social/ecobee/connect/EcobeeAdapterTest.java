@@ -23,6 +23,9 @@ import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.ecobee.api.Ecobee;
 
+/**
+ * @author Greg Turnquist
+ */
 public class EcobeeAdapterTest {
 
 	private EcobeeAdapter apiAdapter = new EcobeeAdapter();

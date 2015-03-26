@@ -15,6 +15,9 @@
  */
 package org.springframework.social.ecobee.api;
 
+/**
+ * @author Greg Turnquist
+ */
 public enum HoldType {
 
 	/**

@@ -17,6 +17,9 @@ package org.springframework.social.ecobee.api;
 
 import org.springframework.social.ApiBinding;
 
+/**
+ * @author Greg Turnquist
+ */
 public interface Ecobee extends ApiBinding {
 
 	ThermostatOperations thermostatOperations();

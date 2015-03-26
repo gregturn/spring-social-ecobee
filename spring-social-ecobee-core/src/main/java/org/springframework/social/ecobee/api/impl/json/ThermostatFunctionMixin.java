@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.ecobee.api.Function;
 import org.springframework.social.ecobee.api.Selection;
 
+/**
+ * @author Greg Turnquist
+ */
 public class ThermostatFunctionMixin extends EcobeeObjectMixin {
 
 	public ThermostatFunctionMixin(@JsonProperty("selection") Selection selection,

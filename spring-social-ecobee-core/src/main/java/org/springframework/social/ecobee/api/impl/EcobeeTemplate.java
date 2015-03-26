@@ -23,6 +23,9 @@ import org.springframework.social.ecobee.api.impl.json.EcobeeModule;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 
+/**
+ * @author Greg Turnquist
+ */
 public class EcobeeTemplate extends AbstractOAuth2ApiBinding implements Ecobee {
 
 	private ThermostatOperations thermostatOperations;

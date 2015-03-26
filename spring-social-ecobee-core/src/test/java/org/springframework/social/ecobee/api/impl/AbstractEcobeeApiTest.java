@@ -23,6 +23,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
+/**
+ * @author Greg Turnquist
+ */
 public abstract class AbstractEcobeeApiTest {
 
 	protected EcobeeTemplate ecobee;

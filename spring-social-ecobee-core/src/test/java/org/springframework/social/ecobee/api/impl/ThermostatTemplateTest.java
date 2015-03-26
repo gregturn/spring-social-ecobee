@@ -34,6 +34,9 @@ import org.springframework.social.ecobee.api.ThermostatFunction;
 import org.springframework.social.ecobee.api.ThermostatSummary;
 import org.springframework.web.util.UriUtils;
 
+/**
+ * @author Greg Turnquist
+ */
 public class ThermostatTemplateTest extends AbstractEcobeeApiTest {
 
 	@Test

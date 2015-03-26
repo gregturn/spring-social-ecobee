@@ -20,6 +20,9 @@ import java.util.List;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @RequiredArgsConstructor
 public class RuntimeReport {

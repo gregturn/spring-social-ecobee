@@ -20,6 +20,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.ecobee.api.RuntimeSensorReport;
 
+/**
+ * @author Greg Turnquist
+ */
 public class RuntimeReportMixin extends EcobeeObjectMixin {
 
 	public RuntimeReportMixin(@JsonProperty("sensorList") List<RuntimeSensorReport> sensorList) {

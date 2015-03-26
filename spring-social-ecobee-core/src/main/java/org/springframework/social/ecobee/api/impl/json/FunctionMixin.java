@@ -19,6 +19,9 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author Greg Turnquist
+ */
 public class FunctionMixin extends EcobeeObjectMixin {
 
 	public FunctionMixin(@JsonProperty("type") String type,

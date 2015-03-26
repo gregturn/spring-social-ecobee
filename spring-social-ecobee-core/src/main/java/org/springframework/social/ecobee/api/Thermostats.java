@@ -20,6 +20,9 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author Greg Turnquist
+ */
 @Data
 @AllArgsConstructor
 public class Thermostats {

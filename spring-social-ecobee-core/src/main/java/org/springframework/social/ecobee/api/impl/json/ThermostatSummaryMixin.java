@@ -20,6 +20,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.ecobee.api.Status;
 
+/**
+ * @author Greg Turnquist
+ */
 public class ThermostatSummaryMixin extends EcobeeObjectMixin {
 
 	public ThermostatSummaryMixin(@JsonProperty("thermostatCount") int thermostatCount,
