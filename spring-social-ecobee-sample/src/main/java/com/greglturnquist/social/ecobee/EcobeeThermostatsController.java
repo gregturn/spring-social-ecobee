@@ -19,6 +19,7 @@ import java.security.Principal;
 import java.util.List;
 
 import lombok.extern.java.Log;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;

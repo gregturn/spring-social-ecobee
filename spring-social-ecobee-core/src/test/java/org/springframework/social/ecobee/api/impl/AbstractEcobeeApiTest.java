@@ -15,13 +15,14 @@
  */
 package org.springframework.social.ecobee.api.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Greg Turnquist

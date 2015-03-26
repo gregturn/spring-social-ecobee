@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import lombok.extern.java.Log;
+
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.ecobee.api.Function;
 import org.springframework.social.ecobee.api.Selection;

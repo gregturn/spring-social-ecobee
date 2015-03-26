@@ -15,13 +15,14 @@
  */
 package org.springframework.social.ecobee.api.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.ecobee.api.Ecobee;
 import org.springframework.social.ecobee.api.ThermostatOperations;
 import org.springframework.social.ecobee.api.impl.json.EcobeeModule;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Greg Turnquist

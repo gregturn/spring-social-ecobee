@@ -17,10 +17,11 @@ package org.springframework.social.ecobee.api.impl.json;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.social.ecobee.api.EcobeeRuntime;
 import org.springframework.social.ecobee.api.RemoteSensor;
 import org.springframework.social.ecobee.api.Settings;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Greg Turnquist
