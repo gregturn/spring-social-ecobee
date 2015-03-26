@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:social="http://spring.io/springsocial">
-<head lang="en">
-    <meta charset="UTF-8" />
-    <title>Spring Social Ecobee Showcase</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:social="http://spring.io/springsocial"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <body>
 
-    <div>
-        <h1><a th:href="@{/}">Spring Social Ecobee Showcase</a></h1>
-    </div>
-
-    <div>
-        <form id="signin" th:action="@{/signin/authenticate}" method="post">
-            <div>
-                <div th:if="${param.error eq 'bad_credentials'}">
-                    Your sign in information was incorrect.
-                    Please try again or <a th:href="@{/signup}">sign up</a>.
+        <div id="content" layout:fragment="content">
+            <form id="signin" th:action="@{/signin/authenticate}" method="post" class="login-page">
+                <div>
+                    <div th:if="${param.error eq 'bad_credentials'}">
+                        Your sign in information was incorrect.
+                        Please try again or <a th:href="@{/signup}">sign up</a>.
+                    </div>
+                    <div th:if="${param.error eq 'multiple_users'}">
+                        Multiple local accounts are connected to the provider account.
+                        Try again with a different provider or with your username and password.
+                    </div>
                 </div>
-                <div th:if="${param.error eq 'multiple_users'}">
-                    Multiple local accounts are connected to the provider account.
-                    Try again with a different provider or with your username and password.
-                </div>
-            </div>
-            <fieldset>
-                <label for="login">Username</label>
-                <input id="login" name="username" type="text" size="25"></input>
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" size="25"></input>
-            </fieldset>
-            <button type="submit">Sign In</button>
 
-            <p>Some test user/password pairs you may use are:</p>
-            <ul>
-                <li>greg/turnquist</li>
-            </ul>
-        </form>
-    </div>
+                <div class="layout"><!--
+                    --><label class="layout__item palm-1/2 lap-1/3 desk-1/5"> User Name: </label><!--
+                    --><input class="layout__item palm-1/2 lap-1/3 desk-1/5" name="username" type="text" autofocus="" /><!--
+                --></div>
+                <div class="layout"><!--
+                    --><label class="layout__item palm-1/2 lap-1/3 desk-1/5"> Password: </label><!--
+                    --><input class="layout__item palm-1/2 lap-1/3 desk-1/5" name="password" type="password" /><!--
+                --></div>
+                <div class="layout"><div class="layout__item palm-1/1"><input type="submit" value="Log In"/></div></div>
 
-</body>
+                <p>Some test user/password pairs you may use are:</p>
+                <ul>
+                    <li>greg/turnquist</li>
+                </ul>
+            </form>
+        </div>
+
+    </body>
 </html>

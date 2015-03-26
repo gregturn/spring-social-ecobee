@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:social="http://spring.io/springsocial"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head lang="en">
+        <meta charset="UTF-8"/>
+        <title>Spring Social Ecobee Showcase</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0"/>
+        <link rel="stylesheet" href="/main.css"/>
+    </head>
+    <body>
+        <header class="page wrapper">
+            <h1><a th:href="@{/}"><img src="/img/spring-social-icon-grn.png" class="icon align"/></a><span class="line">Spring Social Ecobee Showcase</span></h1>
+        </header>
+
+        <section class="wrapper box box--tiny">
+            <div id="content" layout:fragment="content">
+                Content goes here
+            </div>
+        </section>
+
+        <footer class="wrapper box box--tiny">
+            <h3>See the source code on <a href="https://github.com/gregturn/spring-social-ecobee" target="_blank">GitHub</a></h3>
+        </footer>
+
+    </body>
+</html>

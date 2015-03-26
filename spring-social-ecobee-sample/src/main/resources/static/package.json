@@ -1,0 +1,25 @@
+{
+  "name": "spring-social-ecobee-showcase",
+  "version": "0.1.0",
+  "description": "Control your Smart Thermostat",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gregturn/spring-social-ecobee.git"
+  },
+  "keywords": [
+    "spring",
+    "social",
+    "ecobee",
+    "oauth2"
+  ],
+  "author": "Greg L. Turnquist",
+  "license": "ASLv2",
+  "bugs": {
+    "url": "https://github.com/gregturn/spring-social-ecobee/issues"
+  },
+  "homepage": "https://github.com/gregturn/spring-social-ecobee",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.3.12"
+  }
+}

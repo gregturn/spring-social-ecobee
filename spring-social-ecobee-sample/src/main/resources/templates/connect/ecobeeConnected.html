@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:social="http://spring.io/springsocial">
-<head lang="en">
-    <meta charset="UTF-8" />
-    <title>Spring Social Ecobee Showcase</title>
-</head>
-<body>
+      xmlns:social="http://spring.io/springsocial"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <body>
 
-    <div>
-        <h1><a th:href="@{/}">Spring Social Ecobee Showcase</a></h1>
-    </div>
+        <div id="content" layout:fragment="content">
+            <h5>Connected to Ecobee</h5>
 
-    <div>
-        <h5>Connected to Ecobee</h5>
+            <a th:href="@{/ecobee}">View your Ecobee profile</a>
+        </div>
 
-        <a th:href="@{/ecobee}">View your Ecobee profile</a>
-    </div>
-
-</body>
+    </body>
 </html>
