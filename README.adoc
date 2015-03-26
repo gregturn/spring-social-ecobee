@@ -1,0 +1,3 @@
+= Spring Social Ecobee image:https://travis-ci.org/gregturn/spring-social-ecobee.svg?branch=master["Build Status", link="https://travis-ci.org/gregturn/spring-social-ecobee"]
+
+Welcome to Spring Social Ecobee, the library that lets you talk to your Smart Thermostat from Ecobee.
