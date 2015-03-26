@@ -1,9 +1,7 @@
 package com.greglturnquist.social.ecobee;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.ecobee.api.Ecobee;
-import org.springframework.social.ecobee.api.RuntimeSensorReport;
 import org.springframework.social.ecobee.api.Thermostat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,25 +33,16 @@ public class EcobeeThermostatsController {
 		if (connection == null) {
 			return "redirect:/connect/ecobee";
 		}
+
 		// TODO Update repository of connections with new token
 		if (connection.hasExpired()) {
 			connection.refresh();
 		}
 
-		Date startDate = new Date();
-		Date endDate = startDate;
-		String columns = "zoneAveTemp";
-
 		model.addAttribute("authentication", SecurityContextHolder.getContext().getAuthentication());
 		final List<Thermostat> allThermostats = connection.getApi().thermostatOperations().getAllThermostats();
-		List<String> thermostatIds = allThermostats.stream()
-				.map(t -> t.getIdentifier())
-				.collect(Collectors.toList());
+		allThermostats.forEach(t -> t.getRemoteSensors().forEach(s -> s.getCapability().forEach(c -> log.info(c.toString()))));
 		model.addAttribute("thermostats", allThermostats);
-		final List<RuntimeSensorReport> allSensorReports = connection.getApi().thermostatOperations().getAllSensorReports(
-				startDate, endDate, columns, thermostatIds.toArray(new String[]{}));
-		model.addAttribute("runtimeReports",
-				allSensorReports);
 		return "ecobee/thermostats";
 	}
 

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.ecobee.api.EcobeeRuntime;
 import org.springframework.social.ecobee.api.EcobeeUserProfile;
 import org.springframework.social.ecobee.api.Function;
+import org.springframework.social.ecobee.api.RemoteSensor;
+import org.springframework.social.ecobee.api.RemoteSensorCapability;
 import org.springframework.social.ecobee.api.RuntimeReport;
 import org.springframework.social.ecobee.api.RuntimeSensorMetadata;
 import org.springframework.social.ecobee.api.RuntimeSensorReport;
@@ -34,5 +36,7 @@ public class EcobeeModule extends SimpleModule {
 		context.setMixInAnnotations(RuntimeReport.class, RuntimeReportMixin.class);
 		context.setMixInAnnotations(RuntimeSensorReport.class, RuntimeSensorReportMixin.class);
 		context.setMixInAnnotations(RuntimeSensorMetadata.class, RuntimeSensorMetadataMixin.class);
+		context.setMixInAnnotations(RemoteSensor.class, RemoteSensorMixin.class);
+		context.setMixInAnnotations(RemoteSensorCapability.class, RemoteSensorCapabilityMixin.class);
 	}
 }

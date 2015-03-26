@@ -21,19 +21,11 @@
                 Current temperature is <span th:text="${thermostat.runtime.actualTemperature}"/>.
                 Target cold is <span th:text="${thermostat.runtime.desiredCool}" />.
                 Target heat is <span th:text="${thermostat.runtime.desiredHeat}" />.
-            </div>
-            <div th:each="report : ${runtimeReports}">
-                <span th:each="${report.thermostatIdentifier}"/> has the following sensors:
-                <ul>
-                    <li th:each="sensor : ${report.sensors}"/>
-                </ul>
-                Columns:
-                <div th:each="column : ${report.columns}">
-                    <span th:text="${column}"/>
-                </div>
-                Data:
-                <div th:each="data : ${report.data}">
-                    <span th:text="${data}"/>
+                <div th:each="remoteSensor : ${thermostat.remoteSensors}">
+                    Sensor <span th:text="${remoteSensor.name}" /> (code <span th:text="${remoteSensor.code}" />) has the following readings:
+                    <div th:each="capability : ${remoteSensor.capability}">
+                        <span th:text="${capability.type}" /> reads <span th:text="${capability.value}"/>
+                    </div>
                 </div>
             </div>
         </div>
