@@ -37,6 +37,9 @@ $inuit-base-background-color: $spring-antique-white;
 $inuit-enable-layout--large: true;
 @import "bower_components/inuit-layout/objects.layout";
 
+$inuit-enable-flag--tiny: true;
+@import "bower_components/inuit-flag/objects.flag";
+
 $inuit-enable-btn--small: true;
 $inuit-btn-background: $spring-green;
 $inuit-btn-color: $spring-white;

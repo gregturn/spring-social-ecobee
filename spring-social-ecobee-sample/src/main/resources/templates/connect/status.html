@@ -7,18 +7,27 @@
 
         <div id="content" layout:fragment="content">
             <h3>Your Connections</h3>
-            <div class="accountConnection" th:each="providerId : ${providerIds}">
-                <h4><img th:src="@{#{${providerId} + '.icon'}}" width="36" height="36" /><span th:text="#{${providerId} + '.displayName'}">provider name</span></h4>
-                <p>
-                    <span th:if="${!#lists.isEmpty(connectionMap[__${providerId}__])}">
-                        You are connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span> as <span th:text="${connectionMap[__${providerId}__][0].displayName}">user display name</span>.
-                    </span>
-                    <span th:if="${#lists.isEmpty(connectionMap[__${providerId}__])}">
-                        You are not yet connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span>.
-                    </span>
-                    Click <a th:href="@{'/connect/' + ${providerId}}">here</a> to manage your <span th:text="#{${providerId} + '.displayName'}">provider name</span> connection.
-                </p>
-            </div>
+            <ul class="layout">
+                <li th:each="providerId : ${providerIds}" class="layout__item 1/1">
+                    <div class="flag flag--tiny">
+                        <div class="flag__img">
+                            <img th:src="@{#{${providerId} + '.icon'}}" class="icon"/>
+                        </div>
+                        <div class="flag__body">
+                            <span th:text="#{${providerId} + '.displayName'}">provider name</span>
+                        </div>
+                    </div>
+                    <p>
+                        <span th:if="${!#lists.isEmpty(connectionMap[__${providerId}__])}">
+                            You are connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span> as <span th:text="${connectionMap[__${providerId}__][0].displayName}">user display name</span>.
+                        </span>
+                        <span th:if="${#lists.isEmpty(connectionMap[__${providerId}__])}">
+                            You are not yet connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span>.
+                        </span>
+                        Click <a th:href="@{'/connect/' + ${providerId}}">here</a> to manage your <span th:text="#{${providerId} + '.displayName'}">provider name</span> connection.
+                    </p>
+                </li>
+            </ul>
         </div>
 
     </body>

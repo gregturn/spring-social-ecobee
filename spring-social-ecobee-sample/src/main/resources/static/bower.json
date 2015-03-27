@@ -26,6 +26,7 @@
     "inuit-layout": "~0.3.2",
     "inuit-widths-responsive": "~0.1.3",
     "inuit-buttons": "~0.4.1",
-    "inuit-box": "~0.4.4"
+    "inuit-box": "~0.4.4",
+    "inuit-flag": "~0.3.2"
   }
 }
