@@ -8,6 +8,17 @@
         <div id="content" layout:fragment="content">
             <h5>Connected to Ecobee</h5>
 
+            <form id="disconnect" th:action="@{/connect/ecobee}" method="post">
+                <div>
+                    <p>
+                        Spring Social Showcase is connected to your Ecobee account.
+                        Click the button if you wish to disconnect.
+                    </p>
+                </div>
+                <button type="submit">Disconnect from Ecobee</button>
+                <input type="hidden" name="_method" value="delete" />
+            </form>
+
             <a th:href="@{/ecobee}">View your Ecobee profile</a>
         </div>
 

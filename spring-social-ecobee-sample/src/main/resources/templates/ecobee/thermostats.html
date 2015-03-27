@@ -32,6 +32,12 @@
                     --></div>
                 </div>
             </div>
+
+            <form id="disconnect" th:action="@{/connect/ecobee}" method="post">
+                <button type="submit">Disconnect from Ecobee</button>
+                <input type="hidden" name="_method" value="delete" />
+            </form>
+
         </div>
 
     </body>
