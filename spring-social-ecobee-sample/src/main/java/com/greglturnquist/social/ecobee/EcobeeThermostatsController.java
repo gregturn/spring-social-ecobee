@@ -53,7 +53,6 @@ public class EcobeeThermostatsController {
 			return "redirect:/connect/ecobee";
 		}
 
-		// TODO Update repository of connections with new token
 		if (connection.hasExpired()) {
 			connection.refresh();
 		}
