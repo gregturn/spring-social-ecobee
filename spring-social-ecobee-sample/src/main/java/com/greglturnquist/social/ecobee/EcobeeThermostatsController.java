@@ -54,6 +54,7 @@ public class EcobeeThermostatsController {
 		}
 
 		if (connection.hasExpired()) {
+			log.info("Token has expired. Time to refresh");
 			connection.refresh();
 		}
 
