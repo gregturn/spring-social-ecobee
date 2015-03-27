@@ -11,20 +11,27 @@
             <div>
                 <h3>Your thermostats</h3>
                 <div th:each="thermostat : ${thermostats}">
-                    Thermostat <span th:text="${thermostat.identifier}"/> is known as <span th:text="${thermostat.name}"/>.
-                    It is currently in <span th:text="${thermostat.settings.hvacMode}"/> mode.
-                    Current temperature is <span th:text="${thermostat.runtime.actualTemperature}"/>.
-                    Target cold is <span th:text="${thermostat.runtime.desiredCool}" />.
-                    Target heat is <span th:text="${thermostat.runtime.desiredHeat}" />.
-                    <div th:each="remoteSensor : ${thermostat.remoteSensors}">
-                        Sensor <span th:text="${remoteSensor.name}" /> (code <span th:text="${remoteSensor.code}" />) has the following readings:
-                        <div th:each="capability : ${remoteSensor.capability}">
-                            <span th:text="${capability.type}" /> reads <span th:text="${capability.value}"/>
-                        </div>
-                    </div>
+                    <ul>
+                        <li>Thermostat <span th:text="${thermostat.identifier}"/> is known as <span th:text="${thermostat.name}"/></li>
+                        <li>It is currently in <span th:text="${thermostat.settings.hvacMode}"/> mode.</li>
+                        <li>Current temperature is <span th:text="${thermostat.runtime.actualTemperature}"/>.</li>
+                        <li>Target cold is <span th:text="${thermostat.runtime.desiredCool}" />.</li>
+                        <li>Target heat is <span th:text="${thermostat.runtime.desiredHeat}" />.</li>
+                    </ul>
+
+                    <div class="layout"><!--
+                        --><div th:each="remoteSensor : ${thermostat.remoteSensors}" class="layout__item palm-1/1 lap-1/2 desk-1/4">
+                            <div><!--
+                                --><div class="layout__item 1/1">Sensor <span th:text="${remoteSensor.name}" /> (code <span th:text="${remoteSensor.code}" />)</div><!--
+                                --><div class="layout__item 1/1" th:each="capability : ${remoteSensor.capability}"><!--
+                                    --><span th:text="${capability.type}" class="layout__item palm-1/2 lap-and-up-2/3"/><!--
+                                    --><span th:text="${capability.value}" class="layout__item palm-1/2 lap-and-up-1/3"/><!--
+                                --></div><!--
+                            --></div>
+                        </div><!--
+                    --></div>
                 </div>
             </div>
-
         </div>
 
     </body>
