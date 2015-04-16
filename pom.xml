@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.springframework.social</groupId>
+	<groupId>com.greglturnquist</groupId>
 	<artifactId>spring-social-ecobee</artifactId>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<modules>
@@ -14,5 +14,15 @@
 
 	<name>Spring Social Ecobee</name>
 	<description>Talk to a Smart Thermostat</description>
+
+	<contributors>
+		<contributor>
+			<name>Greg Turnquist</name>
+			<url>http://blog.greglturnquist.com</url>
+			<roles><role>Project Lead</role></roles>
+			<timezone>-6</timezone>
+			<email>greg.l.turnquist at gmail.com</email>
+		</contributor>
+	</contributors>
 
 </project>

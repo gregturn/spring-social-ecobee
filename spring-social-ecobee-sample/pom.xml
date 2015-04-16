@@ -4,24 +4,26 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.greglturnquist</groupId>
 	<artifactId>spring-social-ecobee-sample</artifactId>
+	<version>0.1.0.BUILD-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.2.RELEASE</version>
+		<version>1.2.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
-		<start-class>com.greglturnquist.social.ecobee.SpringEcobeeApplication</start-class>
+		<start-class>com.greglturnquist.spring.social.ecobee.SpringEcobeeApplication</start-class>
 		<java.version>1.8</java.version>
 		<jsoup.version>1.8.1</jsoup.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.social</groupId>
+			<groupId>com.greglturnquist</groupId>
 			<artifactId>spring-social-ecobee-core</artifactId>
 			<version>0.1.0.BUILD-SNAPSHOT</version>
 		</dependency>
