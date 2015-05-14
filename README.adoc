@@ -1,3 +1,51 @@
 = Spring Social Ecobee image:https://travis-ci.org/gregturn/spring-social-ecobee.svg?branch=master["Build Status", link="https://travis-ci.org/gregturn/spring-social-ecobee"] image:https://badges.gitter.im/Join%20Chat.svg[link="https://gitter.im/gregturn/spring-social-ecobee?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
 
 Welcome to Spring Social Ecobee, the library that lets you talk to your Smart Thermostat from Ecobee.
+
+== Working with snapshots
+
+As you can see from the badges at the top, this project integrates with Travis for continuous integration. On top of that, all commits to master get deployed as snapshots to Sonatype OSS. Snapshots aren't synced to Maven Central, so if you wish to use a snapshot release in your build, you need to add some extra bits.
+
+* https://oss.sonatype.org/content/repositories/snapshots - this is the repository where snapshot builds can be found
+
+Below are some configuration options. If your tool isn't found, you will have to look it up and use the repo listed above.
+
+=== Maven
+
+For maven, the simplest option is to add this to your `pom.xml` file:
+
+[source,xml]
+----
+<repositories>
+	...
+	<repository>
+		<id>sonatype-oss-snapshots</id>
+		<name>Sonatype OSS Snapshots</name>
+		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		<snapshots>
+			<enabled>true</enabled>
+		</snapshots>
+	</repository>
+	...
+</repositories>
+----
+
+With maven, it's possible to put repository settings inside profiles, etc. That isn't covered here.
+
+=== Gradle
+
+For gradle, the simplest option is to add this to your `build.gradle` file:
+
+[source,groovy]
+----
+repositories {
+	...
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+----
+
+This is nowhere near exhaustive. Gradle has a plethora of options.
+
+== License
+
+Spring Social Ecobee is released under version 2.0 of the Apache License

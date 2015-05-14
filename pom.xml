@@ -3,26 +3,128 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.greglturnquist</groupId>
+	<groupId>com.greglturnquist.spring.social.ecobee</groupId>
 	<artifactId>spring-social-ecobee</artifactId>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<modules>
 		<module>spring-social-ecobee-core</module>
-		<module>spring-social-ecobee-sample</module>
 	</modules>
 	<packaging>pom</packaging>
 
 	<name>Spring Social Ecobee</name>
-	<description>Talk to a Smart Thermostat</description>
+	<description>Talk to an Ecobee Smart Thermostat</description>
 
-	<contributors>
-		<contributor>
+	<developers>
+		<developer>
 			<name>Greg Turnquist</name>
-			<url>http://blog.greglturnquist.com</url>
-			<roles><role>Project Lead</role></roles>
-			<timezone>-6</timezone>
 			<email>greg.l.turnquist at gmail.com</email>
-		</contributor>
-	</contributors>
+			<organization>GregLTurnquist.com</organization>
+			<organizationUrl>http://blog.greglturnquist.com</organizationUrl>
+			<timezone>-6</timezone>
+			<roles>
+				<role>Project Lead</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache License, 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:gregturn/spring-social-ecobee.git</connection>
+		<developerConnection>scm:git:git@github.com:gregturn/spring-social-ecobee.git</developerConnection>
+		<url>git@github.com:gregturn/spring-social-ecobee.git</url>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<profiles>
+
+		<!-- Bring in spring-social-ecobee-sample through a default profile, allowing it to be excluded from release -->
+		<profile>
+			<id>default</id>
+			<activation><activeByDefault>true</activeByDefault></activation>
+			<modules>
+				<module>spring-social-ecobee-sample</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>release</id>
+			<properties>
+				<!--<gpg.keyname>Instead type -Dgpg.keyname=<id> on mvn command line</gpg.keyname>-->
+				<gpg.useagent>true</gpg.useagent>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 
 </project>
