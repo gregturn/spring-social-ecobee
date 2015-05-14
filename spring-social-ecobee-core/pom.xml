@@ -7,7 +7,7 @@
 	<artifactId>spring-social-ecobee-core</artifactId>
 
 	<parent>
-		<groupId>com.greglturnquist</groupId>
+		<groupId>com.greglturnquist.spring.social.ecobee</groupId>
 		<artifactId>spring-social-ecobee</artifactId>
 		<version>0.1.0.BUILD-SNAPSHOT</version>
 	</parent>

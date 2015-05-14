@@ -1,6 +1,16 @@
 language: java
+
 jdk:
-  - oraclejdk8
+- oraclejdk8
+
+cache:
+  directories:
+  - $HOME/.m2
+
+script:
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" ]; then mvn -Prelease deploy -Dgpg.skip=true --settings mySettings.xml;
+  else mvn package; fi
+
 notifications:
   webhooks:
     urls:
