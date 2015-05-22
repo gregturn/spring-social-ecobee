@@ -4,7 +4,7 @@
 
 	<groupId>com.greglturnquist.spring.social.ecobee</groupId>
 	<artifactId>spring-social-ecobee-sample</artifactId>
-	<version>0.1.0.RELEASE</version>
+	<version>0.2.0.BUILD-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.greglturnquist.spring.social.ecobee</groupId>
 			<artifactId>spring-social-ecobee-core</artifactId>
-			<version>0.1.0.RELEASE</version>
+			<version>0.2.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -135,9 +135,4 @@
 
 		</plugins>
 	</build>
-
-
-  <scm>
-    <tag>0.1.0.RELEASE</tag>
-  </scm>
 </project>

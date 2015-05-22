@@ -4,7 +4,7 @@
 
 	<groupId>com.greglturnquist.spring.social.ecobee</groupId>
 	<artifactId>spring-social-ecobee</artifactId>
-	<version>0.1.0.RELEASE</version>
+	<version>0.2.0.BUILD-SNAPSHOT</version>
 	<modules>
 		<module>spring-social-ecobee-core</module>
 	</modules>
@@ -38,7 +38,7 @@
 		<connection>scm:git:git@github.com:gregturn/spring-social-ecobee.git</connection>
 		<developerConnection>scm:git:git@github.com:gregturn/spring-social-ecobee.git</developerConnection>
 		<url>git@github.com:gregturn/spring-social-ecobee.git</url>
-	  <tag>0.1.0.RELEASE</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<distributionManagement>
