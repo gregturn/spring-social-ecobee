@@ -13,6 +13,7 @@
 
 	<name>Spring Social Ecobee</name>
 	<description>Talk to an Ecobee Smart Thermostat</description>
+	<url>https://github.com/gregturn/spring-social-ecobee</url>
 
 	<developers>
 		<developer>
