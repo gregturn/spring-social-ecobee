@@ -2,7 +2,65 @@
 
 Welcome to Spring Social Ecobee, the library that lets you talk to your Smart Thermostat from Ecobee.
 
-== Working with snapshots
+* https://github.com/gregturn/spring-social-ecobee/issues[Issues]
+* https://github.com/gregturn/spring-social-ecobee/pulls[Pull Requests]
+* See above for CI and chatting with gitter.
+
+NOTE: Spring Social Ecobee is a community project and NOT officially supported by the Spring Social team. This should be clear given the project is under the domain *com.greglturnquist*.
+
+== Getting Started
+
+You can get started real fast:
+
+. Clone this project
+. `mvn package`
+. `cd spring-social-ecobee-sample`
+. `ECOBEE_APIKEY=your-ecobee-app-key mvn spring-boot:run`
+. Surf to localhost:8080
+
+This small http://projects.spring.io/spring-boot/[Spring Boot] application will fire up and let the user login and register with their Ecobee thermostat, then give you a tour of the basics.
+
+Want to use the code in your own project? Spring Social Ecobee releases (i.e. releases, release candidates, and milestones) are published to Maven Central.
+
+For maven, add this to your `pom.xml` file:
+
+[source,xml]
+----
+<dependencies>
+	<dependency>
+		<groupId>com.greglturnquist.spring.social.ecobee</groupId>
+		<artifactId>spring-social-ecobee-core</artifactId>
+		<version>${spring-social-ecobee.version}</version>
+	</dependency>
+</dependencies>
+----
+
+For gradle, add this to your `build.gradle` file:
+
+[source,groovy]
+----
+dependencies {
+	compile("com.greglturnquist.spring.social.ecobee:spring-social-ecobee-core:${springSocialEcobeeVersion}")
+}
+----
+
+With this in place, you need to configure an `EcobeeConnectionFactory`:
+
+[source,java]
+----
+@Bean
+public EcobeeConnectionFactory ecobeeConnectionFactory(ConnectionFactoryRegistry registry, Environment env) {
+	final EcobeeConnectionFactory ecobeeConnectionFactory = new EcobeeConnectionFactory(env.getProperty("ecobee.apiKey"));
+	registry.addConnectionFactory(ecobeeConnectionFactory);
+	return ecobeeConnectionFactory;
+}
+----
+
+This fragment leans on Spring Framework's `Environment` class along with http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-relaxed-binding[Spring Boot's relaxed bindings] to fetch *ecobee.apiKey*. It will then create an `EcobeeTemplate` which you can fetch by auto-wiring. From there, you can explore it's features.
+
+Checkout the showcase application for more details.
+
+=== Working with snapshots
 
 As you can see from the badges at the top, this project integrates with Travis for continuous integration. On top of that, all commits to master get deployed as snapshots to Sonatype OSS. Snapshots aren't synced to Maven Central, so if you wish to use a snapshot release in your build, you need to add some extra bits.
 
@@ -10,7 +68,7 @@ As you can see from the badges at the top, this project integrates with Travis f
 
 Below are some configuration options. If your tool isn't found, you will have to look it up and use the repo listed above.
 
-=== Maven
+==== Maven
 
 For maven, the simplest option is to add this to your `pom.xml` file:
 
@@ -32,7 +90,7 @@ For maven, the simplest option is to add this to your `pom.xml` file:
 
 With maven, it's possible to put repository settings inside profiles, etc. That isn't covered here.
 
-=== Gradle
+==== Gradle
 
 For gradle, the simplest option is to add this to your `build.gradle` file:
 
