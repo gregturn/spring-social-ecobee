@@ -78,6 +78,19 @@
 		</profile>
 
 		<profile>
+			<!--
+				Snapshots are automatically published via travis-ci. See .travis.yml for details.
+
+				To do a release (.RELEASE, .RC?, .M?):
+				1. Check in all changes and ensure there are no edited files.
+				2. mvn release:prepare (answer questions to roll version numbers) NOTE: These mods will get pushed to origin
+				3. USERNAME=<osshr username> PASSWORD=<ossrh password> mvn -Darguments="-Dgpg.keyname=<gpg keyname>" release:perform
+				4. git push
+				5. Inspect handiwork at https://oss.sonatype.org/content/groups/public/com/greglturnquist/spring/social/ecobee/spring-social-ecobee/
+					NOTE: This repository shows both snapshots and releases
+
+				These steps will bump up the version numbers, test, package, upload, and release. Sync to Maven Central pending.
+			-->
 			<id>release</id>
 			<properties>
 				<!--<gpg.keyname>Instead type -Dgpg.keyname=<id> on mvn command line</gpg.keyname>-->
